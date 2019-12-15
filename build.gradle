@@ -1,5 +1,4 @@
 buildscript {
-    // ext -> 전역 변수를 설정
     ext {
         springBootVersion = '2.1.9.RELEASE'
     }
@@ -12,25 +11,33 @@ buildscript {
     }
 }
 
-// 자바와 스프링 부트 사용하기 위한 필수 플러그인
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management' // 스프링부트의 의존성 관리 플러그인 (필수)
+apply plugin: 'io.spring.dependency-management'
 
 group 'com.jojoldu.book'
-version '1.0-SNAPSHOT'
+version '1.0.4-SNAPSHOT-'+new Date().format("yyyyMMddHHmmss")
 sourceCompatibility = 1.8
 
-// 각종 의존성들을 어떤 원격 저장소에서 받을 지 결정
-// 기본적으로 mavenCentral() 많이 사용 - 라이브러리 업로드 난이도로 인해 최근에는 jcenter()도 많이 사용
 repositories {
     mavenCentral()
     jcenter()
 }
 
-// 프로젝트 개발에 필요한 의존성들을 선언하는 곳
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile('org.projectlombok:lombok')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-mustache')
+    compile('com.h2database:h2')
+    compile('org.springframework.boot:spring-boot-starter-mustache')
+
+//    compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+//    compile('org.springframework.session:spring-session-jdbc')
+//
+//    compile("org.mariadb.jdbc:mariadb-java-client")
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+//    testCompile("org.springframework.security:spring-security-test")
 }
